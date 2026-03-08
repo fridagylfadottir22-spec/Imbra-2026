@@ -163,7 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);mi
     <p class="section-desc">Veldu viðburði fyrir hvert tímabil</p>
     <div style="margin-bottom:28px;">
       <label style="display:block;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Fullt nafn</label>
-      <input type="text" id="student-name" class="text-input" placeholder="Sláðu inn nafnið þitt...">
+      <input type="text" id="student-name" class="text-input" placeholder="Fornafn og eftirnafn...">
     </div>
     <div id="signup-slots"></div>
     <div id="signup-error" class="error-box" style="display:none;"></div>
@@ -451,6 +451,7 @@ async function handleSubmit() {
   const nameInput=document.getElementById('student-name'), trimmed=nameInput.value.trim();
   const errorBox=document.getElementById('signup-error'), submitBtn=document.getElementById('submit-btn');
   if(!trimmed){errorBox.textContent='Vinsamlegast sláðu inn nafnið þitt.';errorBox.style.display='block';return;}
+  if(trimmed.split(/\s+/).length < 2){errorBox.textContent='Vinsamlegast sláðu inn fullt nafn (fornafn og eftirnafn).';errorBox.style.display='block';return;}
   if(!mandChecks.hamingjan || !mandChecks.escape){errorBox.textContent='Vinsamlegast hakaðu við báða viðburði á miðvikudagsmorgun.';errorBox.style.display='block';return;}
   if(!thuMode){errorBox.textContent='Vinsamlegast veldu tegund fimmtudagsviðburðar (tvöfaldur eða fyrri+seinni).';errorBox.style.display='block';return;}
   const required=getRequiredSlots();
